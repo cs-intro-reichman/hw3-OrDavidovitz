@@ -38,7 +38,7 @@ public class Anagram {
 		for (int i=0; i<str.length();i++)
 		{
 			
-			if ((str.charAt(i)<65||str.charAt(i)>122)) {
+			if (((str.charAt(i)<65||str.charAt(i)>122))&&str.charAt(i)!=32) {
 				continue;
 			}
 			if(Character.isUpperCase(str.charAt(i)))
