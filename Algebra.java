@@ -107,110 +107,47 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		int sum = x;
-		if (n==0)
-		return 1;
-		for ( int l = 0; l<n-1;l++)
-		{
-			sum=times(sum, x);
+		if (n == 0) return 1; 
+		int result = 1;
+		boolean negativeBase = (x < 0) && (n % 2 != 0); 
+	
+		for (int i = 0; i < n; i++) {
+			result = times(result, x); 
 		}
-		return sum;
+		if (negativeBase) {
+			result = -result;
+		}
+	
+		return result;
 	}
-
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
+		// מתודה זו מחשבת את החלוקה של x1 ב-x2
+		// מחזירה 0 אם x2 שווה לאפס (לא ניתן לחלק ב-0)
+		// מחזירה את התוצאה (בשלם) של x1/x2
 		
-		int divi = 0 ;
-		int num = x1;
-		int diviser = x2;
-		if (x1==x2)
-		{
-			return 1;
+		if (x2 == 0) {
+			// חלוקה ב-0 אינה אפשרית
+			return 0;
 		}
-		if (x1==0 || x2==0) 
-		{
-			return 0 ;
-		}
-		if ((x1>0&&x2>0)) 
-		{
-			
-			if(x1>0)	
-				if (x1<x2)
-				{
-					return divi;
-				}
-				
-				while (num>=diviser)
-				{
-					num = minus(num, diviser);
-					divi++;
-				}
-		}
-		if (x1>0&&x2<0)
-		 x2=times(x2, -1);
-		{
-			if ((x1>0&&x2>0)) 
-			{
-				
-				if(x1>0)	
-					if (x1<x2)
-					{
-						return -1;
-					}
-					
-					while (num>=diviser)
-					{
-						num = minus(num, diviser);
-						divi--;
-					}
-			}
 		
+		int divi = 0;
+		int num = Math.abs(x1);   // לוקחים את הערך המוחלט של x1
+		int diviser = Math.abs(x2); // לוקחים את הערך המוחלט של x2
+	
+		// נבדוק חלוקה של שני מספרים חיוביים
+		while (num >= diviser) {
+			num = minus(num, diviser); // כל פעם מורידים את x2 מ-x1
+			divi++;
 		}
-		if (x1<00&&x2>0)
-		{
-			x1 = times(x1, -1);
-			if ((x1>0&&x2>0)) 
-		{
-			
-			if(x1>0)	
-				if (x1<x2)
-				{
-					return -1;
-				}
-				
-				while (num>=diviser)
-				{
-					num = minus(num, diviser);
-					divi--;
-				}
+	
+		// אם אחד מהמספרים שליליים, התוצאה צריכה להיות שלילית
+		if ((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0)) {
+			divi = -divi;
 		}
-		}
-		if (x1<0&&x2<0)
-		 {
-			x1=times(x1, -1);
-			x2=times(x2, -1);
-			if ((x1>0&&x2>0)) 
-		{
-			
-			if(x1>0)	
-				if (x1<x2)
-				{
-					return divi;
-				}
-				
-				while (num>=diviser)
-				{
-					num = minus(num, diviser);
-					divi++;
-				}
-		}
-			
-		 }
+	
 		return divi;
 	}
-
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		
