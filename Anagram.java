@@ -53,34 +53,29 @@ public class Anagram {
 		
 		return newstr;
 	} 
-	   	// Returns true if the two given strings are anagrams, false otherwise.
-	public static boolean isAnagram(String str1, String str2) {
-		int checker = 0;
-		str1= preProcess(str1);
-		str2=preProcess(str2);
-		if (str1.length()!=str2.length())
-		{
-			return false;
-		}
-		for (int i=0;i<str1.length();i++)
-		{
-			for(int j=0;j<str1.length();j++)
-			{
-				if (str1.charAt(i)==str2.charAt(j))
-				{
-					checker++;
-					break;
-				}
-				
+	   	
+		   public static boolean isAnagram(String str1, String str2) {
+			str1 = preProcess(str1);
+			str2 = preProcess(str2);
+	
+			if (str1.length() != str2.length()) {
+				return false;
 			}
+	
+			int checker = 0;
+	
+			for (int i = 0; i < str1.length(); i++) {
+				for (int j = 0; j < str2.length(); j++) {
+					if (str1.charAt(i) == str2.charAt(j)) {
+						checker++;
+						str2 = str2.substring(0, j) + str2.substring(j + 1);  
+						break;
+					}
+				}
+			}
+	
+			return checker == str1.length();
 		}
-		if (checker==str1.length()) {
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
 
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
@@ -88,16 +83,22 @@ public class Anagram {
 		int length = str.length();
 		String changes = str;
 		Random random = new Random();
-		int randomnum=0;
+		int randomnum = 0;
 		String newstr = "";
-		for(int i=0;i<str.length();i++)
-		{
-			randomnum = random.nextInt(length);
-			newstr+=changes.charAt(randomnum);
-			changes = str.substring(0, randomnum)+str.substring(randomnum+1);
-			length--;
-		}
+		
+		
+		do {
+			newstr = ""; 
+			changes = str;  
+			for (int i = 0; i < str.length(); i++) {
+				randomnum = random.nextInt(length);
+				newstr += changes.charAt(randomnum);
+				changes = str.substring(0, randomnum) + str.substring(randomnum + 1);
+				length--;
+			}
+		} while (newstr.equals(str)); 
 		
 		return newstr;
 	}
+	
 }
