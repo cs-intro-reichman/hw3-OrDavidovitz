@@ -37,29 +37,42 @@ public class Anagram {
         return newstr1;
     } 
 
+	public static String Spaceless(String str) {
+		int l = str.length();
+		String op = "";
+		for (int i = 0; i < l; i++) {
+			if (str.charAt(i) != ' ')
+				op = op + str.charAt(i);
+		}
+		return op;
+	}
+
 	public static boolean isAnagram(String str1, String str2) {
-		str1 = preProcess(str1);
-		str2 = preProcess(str2);
-	
-		if (str1.length() != str2.length()) {
+		String s1 = preProcess(str1); //preprocessed version of str1
+		String s2 = preProcess(str2); //preprocessed version of str2
+		s1 = Spaceless(s1);
+		s2 = Spaceless(s2);
+		int l1 = s1.length();
+		int l2 = s2.length();
+		if (l1 != l2) //anagrams have the same length
 			return false;
-		}
-	
-		for (int i = 0; i < str1.length(); i++) {
-			char currentChar = str1.charAt(i);
-			boolean found = false;
-			for (int j = 0; j < str2.length(); j++) {
-				if (currentChar == str2.charAt(j)) {
-					found = true;
-					str2 = str2.substring(0, j) + str2.substring(j + 1);
-					break;
-				}
+		String temp = "";
+		boolean isSame = false;
+
+		for (int i = 0; i < l1; i++) { //goes over the letters in s1
+			for (int k = 0; k < l2; k++) { //goes over the letters in s2
+				if ((s1.charAt(i) == s2.charAt(k)) && (!isSame)) //checks if two letters are the same
+					isSame = true; 
+				else 
+					temp = temp + s2.charAt(k);
 			}
-			if (!found) {
-				return false;
-			}
+			if (!isSame) //a letter exists in one string and doesn't in another
+				return false; 
+			s2 = temp;
+			l2 = s2.length();
+			temp = "";
+			isSame = false;
 		}
-	
 		return true;
 	}
 	
