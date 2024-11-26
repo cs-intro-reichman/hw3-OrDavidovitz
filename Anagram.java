@@ -4,10 +4,10 @@ import java.util.Random;
 public class Anagram {
     public static void main(String args[]) {
         // Tests the isAnagram function.
-        System.out.println(isAnagram("silent","listen"));  // true
-        System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
-        System.out.println(isAnagram("Madam Curie","Radium came")); // true
-        System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
+        System.out.println(isAnagram("silent", "listen"));  // true
+        System.out.println(isAnagram("William Shakespeare", "I am a weakish speller")); // true
+        System.out.println(isAnagram("Madam Curie", "Radium came")); // true
+        System.out.println(isAnagram("Tom Marvolo Riddle", "I am Lord Voldemort")); // true
 
         // Tests the preProcess function.
         System.out.println(preProcess("What? No way!!!"));
@@ -32,7 +32,7 @@ public class Anagram {
     // to lower-case, and all the other characters are deleted, except for spaces, which are left
     // as is. For example, the string "What? No way!" becomes "whatnoway"
     public static String preProcess(String str) {
-        String newstr1 ="";
+        String newstr1 = "";
         for (int i = 0; i < str.length(); i++) {
             if (((str.charAt(i) < 65 || str.charAt(i) > 122)) && str.charAt(i) != 32) {
                 continue;
@@ -76,14 +76,12 @@ public class Anagram {
         int length = str.length();
         String changes = str;
         Random random = new Random();
-        int randomnum = 0;
         String newstr = "";  
 
         for (int i = 0; i < length; i++) {
-            randomnum = random.nextInt(length); 
+            int randomnum = random.nextInt(changes.length()); 
             newstr += changes.charAt(randomnum);  
-            changes = str.substring(0, randomnum) + str.substring(randomnum + 1);
-            length--; 
+            changes = changes.substring(0, randomnum) + changes.substring(randomnum + 1); 
         }
 
         return newstr;  
