@@ -37,28 +37,34 @@ public class Anagram {
         return newstr1;
     } 
 
-    public static boolean isAnagram(String str1, String str2) {
-        str1 = preProcess(str1);
-        str2 = preProcess(str2);
-
-        if (str1.length() != str2.length()) {
-            return false;
-        }
-
-        int checker = 0;
-        for (int i = 0; i < str1.length(); i++) {
-            char currentChar = str1.charAt(i);
-            for (int j = 0; j < str2.length(); j++) {
-                if (currentChar == str2.charAt(j)) {
-                    checker++;
-                    str2 = str2.substring(0, j) + str2.substring(j + 1);
-                    break;
-                }
-            }
-        }
-
-        return checker == str1.length();
-    }
+	public static boolean isAnagram(String str1, String str2) {
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
+	
+		if (str1.length() != str2.length()) {
+			return false;
+		}
+	
+		int checker = 0;
+		for (int i = 0; i < str1.length(); i++) {
+			char currentChar = str1.charAt(i);
+			boolean found = false;
+			for (int j = 0; j < str2.length(); j++) {
+				if (currentChar == str2.charAt(j)) {
+					checker++;
+					str2 = str2.substring(0, j) + str2.substring(j + 1);
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				return false;
+			}
+		}
+	
+		return checker == str1.length();
+	}
+	
 
     public static String randomAnagram(String str) {
         int length = str.length();
