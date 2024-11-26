@@ -97,7 +97,7 @@ public class Algebra {
 		 }
 		 if (x1<0 && x2<0)
 		 {
-			for (int i=0; i<minus(x2, 2);i--)
+			for (int i=0; i>x2;i--)
 		{
 			sum=minus(sum, x1);
 		}
@@ -109,6 +109,8 @@ public class Algebra {
 	public static int pow(int x, int n) {
 		// Replace the following statement with your code
 		int sum = x;
+		if (n==0)
+		return 1;
 		for ( int l = 0; l<n-1;l++)
 		{
 			sum=times(sum, x);
